@@ -2,6 +2,8 @@
 
 In this post I will show how use axios's `transformRequest` and `transformResponse` functions to convert `snake case` into `camel case` for use in your Vue/Vuex app. 
 
+The source code for the article can be found [here](https://github.com/lmiller1990/axios-transform-example/).
+
 Over the last few years, I've worked on countless Vue and React apps that are backed by APIs built using languges like Python, Ruby and Perl. By convention, many backend languages use `snake case` for variables and functions. This often means that I see Vuex stores that look like this:
 
 ```js
@@ -16,7 +18,9 @@ const state = {
 }
 ```
 
-A mix of `snake case` for data defined on the server, and `camel case` for data defined in the frontend. While there is nothing wrong with this, strictly speaking, it's easy to transform the response if you are using `axios`, one of the most popular HTTP clients in recent years. By doing so, your codebase can follow the JavaScript convention of `camel case`, and your server will be none the wiser. In this article, I will be converting between `snake case` and `camel case`, however the concept is applicable to servers using other conventions, such as `Pascal Case`.
+A mix of `snake case` for data defined on the server, and `camel case` for data defined in the frontend. While there is nothing wrong with this, strictly speaking, it's easy to transform the response if you are using `axios`, one of the most popular HTTP clients in recent years. By doing so, your codebase can follow the JavaScript convention of `camel case`, and your server will be none the wiser. Consistency is important - it will help your app be more scalable and easier to maintain in the long run. 
+
+In this article, I will be converting between `snake case` and `camel case`, however the concept is applicable to servers using other conventions, such as `Pascal Case`.
 
 ## The App
 
@@ -180,4 +184,4 @@ axios.defaults.transformRequest = [(data, headers) => {
 
 This will allow you to code application entirely using the usual JavaScript convention of camel case, and the server side code can continue to operate in snake case.
 
-The source code for the article can be found [here]().
+The source code for the article can be found [here](https://github.com/lmiller1990/axios-transform-example/).
