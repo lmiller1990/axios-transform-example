@@ -111,7 +111,7 @@ I have a server that returns a response in this shape:
 
 Currently the app and output are as follows:
 
-[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_1.png?raw=true)
+![](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_1.png?raw=true)
 
 I want to transform all the keys (in this case `first_name`) to be camel case. I can use the `camelcase-keys` package from npm, combined with `transformResponse`. The updated action looks like this:
 
@@ -132,7 +132,7 @@ getUsers({ commit }) {
 
 Sinc `data` is a stringify JSON object, we need to use `JSON.parse` before calling `camelcaseKeys`. Now the output is as follows:
 
-[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_2.png?raw=true)
+![](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_2.png?raw=true)
 
 Since we used the `{ deep: true }` option, any nested objects will also have their keys transformed.
 
@@ -157,7 +157,7 @@ updateUsers({}, users) {
 
 Since the request is already a valid JSON object, we do not call `JSON.parse`. Rather, we need to `JSON.stringify` it, since the body of a POST request must be a string. Clicking Update Data and inspecting the network tab shows the response payload was converted back to snake case:
 
-[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_3.png?raw=true)
+![](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_3.png?raw=true)
 
 ## Globally Configuring Axios
 
