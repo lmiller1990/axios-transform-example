@@ -1,5 +1,7 @@
 ## Consistency in your Vue/Vuex app with Axios's `transformRequest` and `transformResponse`
 
+In this post I will show how use axios's `transformRequest` and `transformResponse` functions to convert `snake case` into `camel case` for use in your Vue/Vuex app. 
+
 Over the last few years, I've worked on countless Vue and React apps that are backed by APIs built using languges like Python, Ruby and Perl. By convention, many backend languages use `snake case` for variables and functions. This often means that I see Vuex stores that look like this:
 
 ```js
@@ -14,13 +16,13 @@ const state = {
 }
 ```
 
-A mix of snake case for data defined on the server, and camel case for data defined in the frontend. While there is nothing wrong with this, strictly speaking, it's easy to transform the response if you are using axios, which is by far the http client I encounter most frequently. By doing so, your codebase can follow the JavaScript convention of camel case. In this post I will show how to do so, using axios's `transformRequest` and `transformResponse` functions. In this example, I will be converting between snake case and camel case, however the concept is applicable to other conventions.
+A mix of `snake case` for data defined on the server, and `camel case` for data defined in the frontend. While there is nothing wrong with this, strictly speaking, it's easy to transform the response if you are using `axios`, one of the most popular HTTP clients in recent years. By doing so, your codebase can follow the JavaScript convention of `camel case`, and your server will be none the wiser. In this article, I will be converting between `snake case` and `camel case`, however the concept is applicable to servers using other conventions, such as `Pascal Case`.
 
 ## The App
 
-First, a super simple Vue/Vuex app that has two actions, `getUsers` and `updateUsers`. It's all in one file, for brevity.
+First, a super simple Vue/Vuex app that has two actions, `getUsers` and `updateUsers`. `getUsers` fetches some simple JSON formatted in `snake case`, and `updateUsers` posts the data the data back. The end goal will be to convert the response from the `getUsers` request to `camel case`, and convert it back to `snake case` when posting it with `updateUsers`.
 
-```
+```js
 import Vue from 'vue/dist/vue.esm.js'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -109,7 +111,7 @@ I have a server that returns a response in this shape:
 
 Currently the app and output are as follows:
 
-[ss_1.png]
+[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_1.png?raw=true)
 
 I want to transform all the keys (in this case `first_name`) to be camel case. I can use the `camelcase-keys` package from npm, combined with `transformResponse`. The updated action looks like this:
 
@@ -130,7 +132,7 @@ getUsers({ commit }) {
 
 Sinc `data` is a stringify JSON object, we need to use `JSON.parse` before calling `camelcaseKeys`. Now the output is as follows:
 
-[ss_2.png]
+[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_2.png?raw=true)
 
 Since we used the `{ deep: true }` option, any nested objects will also have their keys transformed.
 
@@ -155,7 +157,7 @@ updateUsers({}, users) {
 
 Since the request is already a valid JSON object, we do not call `JSON.parse`. Rather, we need to `JSON.stringify` it, since the body of a POST request must be a string. Clicking Update Data and inspecting the network tab shows the response payload was converted back to snake case:
 
-[ss_3.png]
+[](https://github.com/lmiller1990/axios-transform-example/blob/master/ss_3.png?raw=true)
 
 ## Globally Configuring Axios
 
