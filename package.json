@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "axios": "^0.19.0",
+    "camelcase-keys": "^6.0.0",
+    "snakecase-keys": "^3.1.0",
+    "vue": "^2.6.10",
+    "vuex": "^3.1.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
+  },
+  "scripts": {
+    "dev": "yarn webpack --watch --mode=development",
+    "build": "yarn webpack"
+  }
+}
